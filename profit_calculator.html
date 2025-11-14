@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商贸利润计算器</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+            border-left: 4px solid #4CAF50;
+            display: none; /* 默认隐藏 */
+        }
+        .profit {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2E7D32;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🏪 商贸利润计算器</h2>
+        <div class="input-group">
+            <label for="costPrice">成本价 (元):</label>
+            <input type="number" id="costPrice" placeholder="请输入商品成本">
+        </div>
+        <div class="input-group">
+            <label for="sellPrice">销售价 (元):</label>
+            <input type="number" id="sellPrice" placeholder="请输入商品售价">
+        </div>
+        <div class="input-group">
+            <label for="quantity">销售数量:</label>
+            <input type="number" id="quantity" placeholder="请输入销售数量" value="1">
+        </div>
+        <button onclick="calculateProfit()">计算利润</button>
+
+        <div id="result">
+            <p>单件利润: <span id="unitProfit" class="profit">0</span> 元</p>
+            <p>总利润: <span id="totalProfit" class="profit">0</span> 元</p>
+        </div>
+    </div>
+
+    <script>
+        function calculateProfit() {
+            // 1. 获取输入框的值
+            const costPrice = parseFloat(document.getElementById('costPrice').value) || 0;
+            const sellPrice = parseFloat(document.getElementById('sellPrice').value) || 0;
+            const quantity = parseInt(document.getElementById('quantity').value) || 1;
+
+            // 2. 计算利润
+            const unitProfit = sellPrice - costPrice;
+            const totalProfit = unitProfit * quantity;
+
+            // 3. 显示结果
+            document.getElementById('unitProfit').textContent = unitProfit.toFixed(2);
+            document.getElementById('totalProfit').textContent = totalProfit.toFixed(2);
+
+            // 4. 让结果显示区域可见
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
